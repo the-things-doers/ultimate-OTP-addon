@@ -32,10 +32,10 @@ We also assume a hash function H_l: {0,1}^* -> {0,1}^l
     '''gets (decrypted) website password'''
     getDecPasword(string password,string website):
         if website not in websiteToEncPassword:
-            password <-- {0,1}^l (uniformly distributed)
-            websiteToEncPassword[website] = password
+            randomPassword <- {0,1}^l (uniformly distributed)
+            websiteToEncPassword[website] = randomPassword
         otp = getOTP(password,website)
-        password = websiteToEncPassword[website] 
+        storedPassword = websiteToEncPassword[website] 
         return otp XOR password ##applying otp
 
 
