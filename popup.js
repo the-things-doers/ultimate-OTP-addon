@@ -1,6 +1,3 @@
-
-
-
 //listen to see if button is pressed
 document.getElementById("mybutton").addEventListener("click", async () => {
     //get current tab
