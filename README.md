@@ -19,24 +19,33 @@ in this case, we would need to select 64 of them to make a 6bit -> char mapping.
 We also assume a hash function H_l: {0,1}^* -> {0,1}^l
 
 ### Proposed Protocol
-    '''setup of the protocol, k will be the number of characters per password'''
+    ''''
+    Setup of the protocol.
+    k: the number of characters per password.
+    '''
     Gen(k: uint): 
-        l = 6*k
-        instantiate H_l
-        websiteToEncPassword = map() ## maps [website -> the stored (encrypted) password]
+        l = 6 * k  # Length in bits
+        instantiate H_l  # Hash function outputting l bits
+        websiteToEncryptedPassword = map()  # [website -> encrypted password]
 
-    '''obtains the usuable OTP, from user's password and website'''
-    getOTP(string password,string website):
-        return H_l(password || website) ##concatenates both
+    '''
+    Obtains the usable OTP derived from the user's password and the website.
+    '''
+    getOTP(userPassword: string, website: string):
+        return H_l(userPassword || website)
 
-    '''gets (decrypted) website password'''
-    getDecPasword(string password,string website):
-        if website not in websiteToEncPassword:
-            randomPassword <- {0,1}^l (uniformly distributed)
-            websiteToEncPassword[website] = randomPassword
-        otp = getOTP(password,website)
-        storedPassword = websiteToEncPassword[website] 
-        return otp XOR password ##applying otp
+    '''
+    Gets (decrypted) website password.
+    '''
+    getDecryptedPassword(userPassword: string, website: string):
+        if website not in websiteToEncryptedPassword:
+            # Generate a uniformly random l-bit password to store (encrypt)
+            randomPassword = randomBits(l)
+            websiteToEncryptedPassword[website] = randomPassword
+        otp = getOTP(userPassword, website)
+        encryptedPassword = websiteToEncryptedPassword[website]
+        return xor(otp, encryptedPassword)
+
 
 
 ## Security Model(s)
