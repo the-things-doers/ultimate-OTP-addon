@@ -5,7 +5,7 @@
   "manifest_version": 3,
   "action": {
     "default_popup": "addon.html",
-    "default_icon": "images/2544.webp"
+    "default_icon": "images/2544.png"
   },
   "permissions": ["activeTab", "scripting"]
 }
