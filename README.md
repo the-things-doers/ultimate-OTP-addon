@@ -29,8 +29,8 @@ We also assume a hash function H_l: {0,1}^* -> {0,1}^l
     getOTP(string password,string website):
         return H_l(password || website) ##concatenates both
 
-    '''gets (encrypted) website password'''
-    getPaswword(string password,string website):
+    '''gets (decrypted) website password'''
+    getDecPasword(string password,string website):
         if website not in websiteToEncPassword:
             password <-- {0,1}^l (uniformly distributed)
             websiteToEncPassword[website] = password
