@@ -51,8 +51,49 @@ We also assume a hash function H_l: {0,1}^* -> {0,1}^l
 ## Security Model(s)
 We're going to evaluate the proposed protocol under different Games that an Adversary A plays under some set of rules, and establish results and security garantees under assumptions.
 
-Theses games are going to be presented from the hardest -> easiest to win from the adversary persepective.
-### TODO
 
-            
-        
+### 1. User Password Recovery Attack (UPRA)
+The adversary is given query access to an oracle:
+
+    getOTP(website: string):
+        return getOTP(userPassword,website)    
+for any websites of its choosing and has find userPassword.
+
+**H_l is pre-image resistant => the protocol is UPRA secure**
+
+Proof:
+
+Querying the Oracle at `website = ""`, reduces to the pre-image resistance of H_l.
+
+### 2. OTP Prediction Attack (OPA)
+The adversary is given query access to the oracle:
+
+    getOTP(website: string):
+        return getOTP(userPassword, website)
+for any websites of its choosing, and eventually outputs a pair `(website*,otp*)`; a website he hasn't queried and a one-time pad such that `otp*=H_l(userPassword ∣∣ website*)`
+
+**H_l​ is a pseudorandom function (in the Random Oracle Model) => the protocol is OPA-secure.**
+
+Proof:
+
+If H_l behaves as a PRF, prior outputs for other website inputs yield no useful information about `H_l(userPassword ∣∣ website*)`.
+
+### 3. User Password Recovery Attack Given k Decrypted Password (UPRA-[k]DP)
+The adversary is given query access to the oracle:
+
+    getOTP(website: string):
+        return getOTP(userPassword, website)
+and access to:
+- k website strings `w1,...,wk`
+- the associated decrypted password `p1,...,pk`
+
+
+**H_l​ is a pseudorandom function (in the Random Oracle Model) and randomBits is truly uniformly random => the protocol is UPRA-[k]DP-secure.**
+
+
+Proof:
+
+Each encrypted passwor is sampled uniformly at random and independent of the user password. The xor of a pseudorandom OTP and a uniform random string yields a uniform random string. Therefore, the decrypted password reveals no information about the OTP (and hence about the userPassword) to the adversary.
+
+## Implementation Specifications
+TODO, specify implementation of H_l and randomBits (and others like the char map)
