@@ -5,7 +5,7 @@ The funny idea was that given a super basic password like yoyo123, we would get 
 and secure password doing a simple xor to get a crazy password.
 
 Here is a rough idea of our steps : start from the same simple password -> binary string -> Xor with a randomized binary string of same len (OTP Key) -> Convert back to a string -> use this as a new password.
-You will find in the following section a clearer explaination of our protocole, how it works, and why we belive it is secure. 
+You will find in the following section a clearer explaination of our protocol, how it works, and why we belive it is secure. 
 
 
 
