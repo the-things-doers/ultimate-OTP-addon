@@ -1,13 +1,21 @@
-console.log('[MyExt] ⭐ content.js loaded on', location.href);
+// content.js
+console.log('[MyExt] content.js loaded on', location.href);
 
-(function injectTestButton() {
-  console.log('[MyExt] running injectTestButton()');
+function fillPasswords() {
+  console.log('[MyExt] filling all password fields');
+  document.querySelectorAll("input[type='password']").forEach((input, i) => {
+    input.value = 'password';
+    input.dispatchEvent(new Event('input',  { bubbles: true }));
+    input.dispatchEvent(new Event('change',{ bubbles: true }));
+    console.log(`[MyExt] filled field #${i}`);
+  });
+}
 
-  const firstPassword = document.querySelector('input[type="password"]');
-  console.log('[MyExt] firstPassword =', firstPassword);
-
-  if (!firstPassword) return console.log('[MyExt] no password field');
-
+function injectButton(nextTo) {
+  if (document.getElementById('autoTestPasswordBtn')) {
+    console.log('[MyExt] button already exists');
+    return;
+  }
   const btn = document.createElement('button');
   btn.id = 'autoTestPasswordBtn';
   btn.type = 'button';
@@ -20,19 +28,28 @@ console.log('[MyExt] ⭐ content.js loaded on', location.href);
     border: '1px solid #333',
     zIndex: '9999'
   });
-
-  firstPassword.insertAdjacentElement('afterend', btn);
+  nextTo.insertAdjacentElement('afterend', btn);
   console.log('[MyExt] button injected');
+  btn.addEventListener('click', fillPasswords);
+}
 
-  btn.addEventListener('click', () => {
-    console.log('[MyExt] Test button clicked — filling passwords');
-    const all = document.querySelectorAll('input[type="password"]');
-    console.log('[MyExt] found', all.length, 'fields');
-    all.forEach((input, i) => {
-      input.value = 'password';
-      input.dispatchEvent(new Event('input',  { bubbles: true }));
-      input.dispatchEvent(new Event('change',{ bubbles: true }));
-      console.log(`[MyExt] filled #${i}`);
-    });
+function tryInject() {
+  const pw = document.querySelector("input[type='password']");
+  if (pw) {
+    console.log('[MyExt] password input found:', pw);
+    injectButton(pw);
+    return true;
+  } else {
+    console.log('[MyExt] no password field yet');
+    return false;
+  }
+}
+
+// 1) Try once right away…
+if (!tryInject()) {
+  // 2) …and if that fails, watch the DOM for changes
+  const observer = new MutationObserver((_, obs) => {
+    if (tryInject()) obs.disconnect(); 
   });
-})();
+  observer.observe(document.body, { childList: true, subtree: true });
+}
