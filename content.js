@@ -20,14 +20,6 @@ function injectButton(nextTo) {
   btn.id = 'autoTestPasswordBtn';
   btn.type = 'button';
   btn.textContent = 'Test';
-  Object.assign(btn.style, {
-    marginLeft: '8px',
-    padding: '2px 6px',
-    cursor: 'pointer',
-    background: '#ffc',
-    border: '1px solid #333',
-    zIndex: '9999'
-  });
   nextTo.parentNode.parentNode.insertBefore(button, field.nextSibling);
   console.log('[MyExt] button injected');
   btn.addEventListener('click', fillPasswords);
