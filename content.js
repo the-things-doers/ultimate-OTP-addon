@@ -28,7 +28,7 @@ function injectButton(nextTo) {
     border: '1px solid #333',
     zIndex: '9999'
   });
-  nextTo.insertAdjacentElement('afterend', btn);
+  nextTo.parentNode.parentNode.insertBefore(button, field.nextSibling);
   console.log('[MyExt] button injected');
   btn.addEventListener('click', fillPasswords);
 }
