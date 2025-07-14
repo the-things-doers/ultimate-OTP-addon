@@ -36,7 +36,7 @@ class BitToChar {
     /**
      * Returns the character mapped to the given index.
      *
-     * @param {number} index - Index between 0 and (size - 1).
+     * @param {number} index - Index between 0 and (64 - 1).
      * @returns {string|undefined} The character at the given index, or undefined if out of range.
      */
     static get(index) {
@@ -51,15 +51,6 @@ class BitToChar {
      */
     static indexOf(char) {
         return this.#reverseMap[char];
-    }
-
-    /**
-     * Returns the total number of characters in the mapping.
-     *
-     * @returns {number} Number of mapped characters (typically 64).
-     */
-    static size() {
-        return this.#values.length;
     }
 
     /**
