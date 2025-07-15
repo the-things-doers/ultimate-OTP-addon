@@ -5,8 +5,22 @@ The funny idea was that given a super basic password like yoyo123, we would get 
 and secure password doing a simple xor to get a crazy password.
 
 Here is a rough idea of our steps : start from the same simple password -> binary string -> Xor with a randomized binary string of same len (OTP Key) -> Convert back to a string -> use this as a new password.
-You will find in the following section a clearer explaination of our protocol, how it works, and why we belive it is secure. 
+You will find in the following section a clearer explaination of our protocol, how it works, and why we belive it is secure.
 
+## Jest Installation
+### Step 1
+write in your cmd : 
+    
+    node -v
+
+If you have no version then install the following version on : https://nodejs.org/fr/download
+    
+    v22.17.0
+
+Make sure that the option 'Add to PATH' is selected in the installation
+
+### Step 2
+All the package needed are installed in the project file. TBD if you cannot run tests
 
 
 ## Specifications
