@@ -4,7 +4,7 @@ class BitToChar {
 
     /**
      * Array of characters used for mapping.
-     * Removed characters a, e, o, i, n and digits 1, 2, 7 because they are more frequent
+     * Removed characters a, e, o, i, n and digits 1, 2, 7, 9 because they are more frequent
      * in leaked password datasets, improving uniqueness and reducing predictability.
      *
      * @type {string[]}
@@ -36,7 +36,7 @@ class BitToChar {
     /**
      * Returns the character mapped to the given index.
      *
-     * @param {number} index - Index between 0 and (size - 1).
+     * @param {number} index - Index between 0 and (64 - 1).
      * @returns {string|undefined} The character at the given index, or undefined if out of range.
      */
     static get(index) {
@@ -56,7 +56,7 @@ class BitToChar {
     /**
      * Returns the total number of characters in the mapping.
      *
-     * @returns {number} Number of mapped characters (typically 64).
+     * @returns {number} Number of mapped characters (64 in this case).
      */
     static size() {
         return this.#values.length;
