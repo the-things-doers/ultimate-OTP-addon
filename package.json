@@ -1,0 +1,26 @@
+{
+  "name": "ultimate-otp-addon",
+  "version": "1.0.0",
+  "description": "The funny idea was that given a super basic password like yoyo123, we would get the most insane\r and secure password doing a simple xor to get a crazy password.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/the-things-doers/ultimate-OTP-addon.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/the-things-doers/ultimate-OTP-addon/issues"
+  },
+  "homepage": "https://github.com/the-things-doers/ultimate-OTP-addon#readme",
+  "devDependencies": {
+    "@babel/preset-env": "^7.28.0",
+    "babel-jest": "^30.0.4",
+    "jest": "^30.0.4"
+  }
+}
